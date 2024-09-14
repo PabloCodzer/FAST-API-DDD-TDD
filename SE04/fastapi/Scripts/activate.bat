@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Cozer\Documents\Python\FastAPI\SE04\fastapi
+set VIRTUAL_ENV=C:\Users\Cozer\Documents\Python\SE04\fastapi
 
 if not defined PROMPT set PROMPT=$P$G
 
