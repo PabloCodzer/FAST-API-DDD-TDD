@@ -1,4 +1,7 @@
 # FAST-API-DDD-TDD
 Projeto de API RestFull, utilizando FastApi, Sql Alchemy, Postgres 
 
-Adicionado endpoint para upload/download de imagens. 
+- Upload/Download de imagens;
+- link para acesso das imagens;
+- Hateoas;
+- Content Negotiation ( XML, YAML );
