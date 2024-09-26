@@ -61,33 +61,27 @@ async def get_users(db: AsyncSession = Depends(get_session), token: str = Depend
 async def get_curso_by_id(user_id: int, db: AsyncSession = Depends(get_session)):
     async with db as session:
        
-        query = select(User_Model).filter(User_Model.id == user_id)
+        query = select(User_Model, Photo_Model).join(Photo_Model, isouter=True).where(User_Model.id == user_id)
         result = await session.execute(query)
-        users: List[User_Model] = result.scalars().all()
-        
+        user = result.all()
 
-        statement = select(Photo_Model).join(User_Model)
-        result = await session.execute(statement)
-        photos = result.scalars().all()
-        
-        for photo in photos:
-            print(f'Title: {photo.nome}')
-            # print(f'Title: {photo.nome}, User: {photo.user.name}')
-
-        if len(users) > 0:
-            users_dto = {
-                "id": users[0].id,
-                "name": users[0].name,
-                "email": users[0].email,
-                "photo": photos[0].nome,
-                "photo_url" : f"http://127.0.0.1:8000/api/v1/images/images/{photos[0].nome}"
-                # "password" : get_password_hash(users[0].password),
-                # "verificado" : verify_password("123456", users[0].password)
-            }
+        if len(user) > 0:
+            users_dto = {}
+            for usr, foto in user:
+                if usr is not None:
+                    users_dto['id'] = usr.id
+                    users_dto['name'] = usr.name
+                    users_dto['email'] = usr.email
+                    users_dto['photo_name'] = 'N/A'
+                    users_dto['photo_url'] = f"http://127.0.0.1:8000/api/v1/images/images/N/A"
+                if foto is not None:
+                    foto_nome = foto.nome if foto.nome is not None else 'N/A'
+                    users_dto['photo_name'] = foto_nome
+                    users_dto['photo_url'] =f"http://127.0.0.1:8000/api/v1/images/images/{foto_nome}"
             return users_dto
         else:
             raise HTTPException(detail="Usuario não encontrado", status_code=status.HTTP_404_NOT_FOUND)
-            
+      
 
 #-------------------------------------------------------------
 #       GET BY EMAIL

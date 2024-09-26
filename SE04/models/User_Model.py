@@ -13,5 +13,6 @@ class User_Model(SQLModel, table=True):
 class Photo_Model(SQLModel, table=True):
     __tablename__ = 'photos'
     id: Optional[int] = Field(default=None, primary_key=True)
-    nome: str
+    nome: str 
     user_id: int
+    user_id: int | None = Field(default=None, foreign_key="users.id")
