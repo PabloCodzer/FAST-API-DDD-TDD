@@ -12,13 +12,12 @@ from fastapi import File, UploadFile
 
 router = APIRouter()
 
+UPLOAD_DIRECTORY = "./uploads"
+os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
+
 @router.get('/', status_code=status.HTTP_202_ACCEPTED)
 async def get_cursos():
     return "endpoint da imagem"
-
-
-UPLOAD_DIRECTORY = "../uploads"
-os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
 
 @router.post("/upload-image/")
 async def create_upload_file(upload_file: UploadFile = File(...)): 
