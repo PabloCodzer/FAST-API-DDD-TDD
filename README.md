@@ -6,3 +6,4 @@ Projeto de API RestFull, utilizando FastApi, Sql Alchemy, Postgres
 - link para acesso das imagens;
 - Hateoas;
 - Content Negotiation ( XML, YAML );
+- Documentação: https://sqlmodel.tiangolo.com/
