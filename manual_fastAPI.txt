@@ -46,3 +46,8 @@
 # rodar o container
     docker build -t my-fastapi-app .
     docker run -p 8000:8000 my-fastapi-app
+
+ ####################################
+ # Fazer Deploy 
+ # Mais barato do dia: Digital Ocean - 01/10/2024
+ ####################################
